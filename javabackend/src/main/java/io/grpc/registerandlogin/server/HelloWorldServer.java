@@ -18,9 +18,9 @@ package io.grpc.registerandlogin.server;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import io.grpc.registerandlogin.GreeterGrpc;
 import io.grpc.registerandlogin.HelloReply;
 import io.grpc.registerandlogin.HelloRequest;
+import io.grpc.registerandlogin.grpc.HelloWorldGrpc;
 import io.grpc.stub.StreamObserver;
 
 import java.io.IOException;
@@ -48,7 +48,7 @@ public class HelloWorldServer {
         /* The port on which the server should run */
         int port = 50051;
         server = ServerBuilder.forPort(port)
-                .addService(new GreeterImpl())
+                .addService(new HelloWorldImpl())
                 .build()
                 .start();
         logger.info("Server started, listening on " + port);
@@ -82,12 +82,20 @@ public class HelloWorldServer {
         }
     }
 
-    static class GreeterImpl extends GreeterGrpc.GreeterImplBase {
+    static class HelloWorldImpl extends HelloWorldGrpc.HelloWorldImplBase {
 
         @Override
         public void sayHello(HelloRequest req, StreamObserver<HelloReply> responseObserver) {
             System.out.println("req.name is " + req.getName());
             HelloReply reply = HelloReply.newBuilder().setMessage("Hello " + req.getName()).build();
+            responseObserver.onNext(reply);
+            responseObserver.onCompleted();
+        }
+
+        @Override
+        public void sayHelloAgain(HelloRequest request, StreamObserver<HelloReply> responseObserver) {
+            System.out.println("req.name is " + request.getName());
+            HelloReply reply = HelloReply.newBuilder().setMessage("Hello " + request.getName()).build();
             responseObserver.onNext(reply);
             responseObserver.onCompleted();
         }

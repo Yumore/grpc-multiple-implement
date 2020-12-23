@@ -19,8 +19,6 @@ package io.grpc.registerandlogin.server;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.registerandlogin.*;
-import io.grpc.registerandlogin.grpc.CheckAuthGrpc;
-import io.grpc.registerandlogin.grpc.RegisterGrpc;
 import io.grpc.registerandlogin.utils.Base64Encoder;
 import io.grpc.registerandlogin.utils.DataBaseUtil;
 import io.grpc.registerandlogin.utils.EncryptionUtil;
@@ -142,7 +140,7 @@ public class RegisterAndLoginServer {
         }
     }
 
-    static class CheckAuthImpl extends CheckAuthGrpc.CheckAuthImplBase {
+    static class CheckAuthImpl extends AuthorityGrpc.AuthorityImplBase {
         /**
          * 检查auth
          *
@@ -150,18 +148,18 @@ public class RegisterAndLoginServer {
          * @param responseObserver 响应观察者
          */
         @Override
-        public void checkAuth(CheckAuthRequest req, StreamObserver<CheckAuthReply> responseObserver) {
+        public void authority(AuthorityRequest req, StreamObserver<AuthorityReply> responseObserver) {
             System.out.println("checkAuthInvoked");
             String userName = req.getUserName();
             String auth = req.getAuth();
             String queriedAuth = DataBaseUtil.query(userName, COLUMN_AUTH);
-            CheckAuthReply reply;
+            AuthorityReply reply;
             //用户名对应的auth
             if (!queriedAuth.equals(auth)) {
-                reply = CheckAuthReply.newBuilder().setIsValid(false).build();
+                reply = AuthorityReply.newBuilder().setIsValid(false).build();
             } else {
                 //auth仍有效，无需登录
-                reply = CheckAuthReply.newBuilder().setIsValid(true).build();
+                reply = AuthorityReply.newBuilder().setIsValid(true).build();
             }
             responseObserver.onNext(reply);
             responseObserver.onCompleted();

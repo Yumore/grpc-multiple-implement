@@ -1,6 +1,6 @@
 /*
  * @Author: Nathaniel
- * @Date: 2020-12-21 10:26:50
+ * @Date: 2020-12-23 17:23:08
  */
 // Copyright (c) 2018, the gRPC project authors. Please see the AUTHORS file
 // for details. All rights reserved.
@@ -19,16 +19,15 @@
 
 /// Dart implementation of the gRPC helloworld.Greeter server.
 import 'package:grpc/grpc.dart';
-import 'package:helloworld/src/generated/helloworld.pb.dart';
-import 'package:helloworld/src/generated/helloworld.pbgrpc.dart';
 
-class GreeterService extends GreeterServiceBase {
+import '../lib/src/generated/helloworld.pbgrpc.dart';
+
+class HelloWorldService extends GreeterServiceBase {
   @override
   Future<HelloReply> sayHello(ServiceCall call, HelloRequest request) async {
     return HelloReply()..message = 'Hello, ${request.name}!';
   }
 
-//该方法在helloworld.proto已经被定义
   @override
   Future<HelloReply> sayHelloAgain(
       ServiceCall call, HelloRequest request) async {
@@ -37,11 +36,7 @@ class GreeterService extends GreeterServiceBase {
 }
 
 Future<void> main(List<String> args) async {
-  final server = Server(
-    [GreeterService()],
-    const <Interceptor>[],
-    CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
-  );
+  final server = Server([HelloWorldService()], const <Interceptor>[]);
   await server.serve(port: 50051);
   print('Server listening on port ${server.port}...');
 }

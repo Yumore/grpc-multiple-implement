@@ -1,6 +1,6 @@
 /*
  * @Author: Nathaniel
- * @Date: 2020-12-21 10:26:50
+ * @Date: 2020-12-23 17:23:08
  */
 // Copyright (c) 2018, the gRPC project authors. Please see the AUTHORS file
 // for details. All rights reserved.
@@ -19,28 +19,20 @@
 
 /// Dart implementation of the gRPC helloworld.Greeter client.
 import 'package:grpc/grpc.dart';
-import 'package:helloworld/src/generated/helloworld.pb.dart';
-import 'package:helloworld/src/generated/helloworld.pbgrpc.dart';
+
+import '../lib/src/generated/helloworld.pbgrpc.dart';
 
 Future<void> main(List<String> args) async {
   final channel = ClientChannel(
     'localhost',
     port: 50051,
-    options: ChannelOptions(
-      credentials: ChannelCredentials.insecure(),
-      codecRegistry:
-          CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
-    ),
+    options: ChannelOptions(credentials: ChannelCredentials.insecure()),
   );
-  final stub = GreeterClient(channel);
+  final stub = HelloWorldClient(channel);
 
-  final name = args.isNotEmpty ? args[0] : 'world';
+  final name = args.isNotEmpty ? args[0] : 'Nathaniel';
 
   try {
-    // final response = await stub.sayHello(
-    //   HelloRequest()..name = name,
-    //   options: CallOptions(compression: const GzipCodec()),
-    // );
     var response = await stub.sayHello(HelloRequest()..name = name);
     print('Greeter client received: ${response.message}');
     response = await stub.sayHelloAgain(HelloRequest()..name = name);

@@ -1,5 +1,9 @@
 package io.grpc.registerandlogin.grpc;
 
+import io.grpc.registerandlogin.RegisterProto;
+import io.grpc.registerandlogin.RegisterReply;
+import io.grpc.registerandlogin.RegisterRequest;
+
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ClientCalls.asyncUnaryCall;
 import static io.grpc.stub.ClientCalls.blockingUnaryCall;
@@ -13,36 +17,40 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
  * </pre>
  */
 @javax.annotation.Generated(
-        value = "by gRPC proto compiler (version 1.13.1)",
+        value = "by gRPC proto compiler (version 1.34.1)",
         comments = "Source: register.proto")
 public final class RegisterGrpc {
 
     public static final String SERVICE_NAME = "RegisterAndLogin.Register";
     private static final int METHODID_REGISTER = 0;
     // Static method descriptors that strictly reflect the proto.
-    private static volatile io.grpc.MethodDescriptor<io.grpc.registerandlogin.RegisterRequest,
-            io.grpc.registerandlogin.RegisterReply> getRegisterMethod;
+    private static volatile io.grpc.MethodDescriptor<RegisterRequest,
+            RegisterReply> getRegisterMethod;
     private static volatile io.grpc.ServiceDescriptor serviceDescriptor;
 
     private RegisterGrpc() {
     }
 
-    public static io.grpc.MethodDescriptor<io.grpc.registerandlogin.RegisterRequest,
-            io.grpc.registerandlogin.RegisterReply> getRegisterMethod() {
-        io.grpc.MethodDescriptor<io.grpc.registerandlogin.RegisterRequest, io.grpc.registerandlogin.RegisterReply> getRegisterMethod;
+    @io.grpc.stub.annotations.RpcMethod(
+            fullMethodName = SERVICE_NAME + '/' + "Register",
+            requestType = RegisterRequest.class,
+            responseType = RegisterReply.class,
+            methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+    public static io.grpc.MethodDescriptor<RegisterRequest,
+            RegisterReply> getRegisterMethod() {
+        io.grpc.MethodDescriptor<RegisterRequest, RegisterReply> getRegisterMethod;
         if ((getRegisterMethod = RegisterGrpc.getRegisterMethod) == null) {
             synchronized (RegisterGrpc.class) {
                 if ((getRegisterMethod = RegisterGrpc.getRegisterMethod) == null) {
                     RegisterGrpc.getRegisterMethod = getRegisterMethod =
-                            io.grpc.MethodDescriptor.<io.grpc.registerandlogin.RegisterRequest, io.grpc.registerandlogin.RegisterReply>newBuilder()
+                            io.grpc.MethodDescriptor.<RegisterRequest, RegisterReply>newBuilder()
                                     .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-                                    .setFullMethodName(generateFullMethodName(
-                                            "RegisterAndLogin.Register", "Register"))
+                                    .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Register"))
                                     .setSampledToLocalTracing(true)
                                     .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                            io.grpc.registerandlogin.RegisterRequest.getDefaultInstance()))
+                                            RegisterRequest.getDefaultInstance()))
                                     .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                            io.grpc.registerandlogin.RegisterReply.getDefaultInstance()))
+                                            RegisterReply.getDefaultInstance()))
                                     .setSchemaDescriptor(new RegisterMethodDescriptorSupplier("Register"))
                                     .build();
                 }
@@ -55,7 +63,14 @@ public final class RegisterGrpc {
      * Creates a new async stub that supports all call types for the service
      */
     public static RegisterStub newStub(io.grpc.Channel channel) {
-        return new RegisterStub(channel);
+        io.grpc.stub.AbstractStub.StubFactory<RegisterStub> factory =
+                new io.grpc.stub.AbstractStub.StubFactory<RegisterStub>() {
+                    @Override
+                    public RegisterStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+                        return new RegisterStub(channel, callOptions);
+                    }
+                };
+        return RegisterStub.newStub(factory, channel);
     }
 
     /**
@@ -63,7 +78,14 @@ public final class RegisterGrpc {
      */
     public static RegisterBlockingStub newBlockingStub(
             io.grpc.Channel channel) {
-        return new RegisterBlockingStub(channel);
+        io.grpc.stub.AbstractStub.StubFactory<RegisterBlockingStub> factory =
+                new io.grpc.stub.AbstractStub.StubFactory<RegisterBlockingStub>() {
+                    @Override
+                    public RegisterBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+                        return new RegisterBlockingStub(channel, callOptions);
+                    }
+                };
+        return RegisterBlockingStub.newStub(factory, channel);
     }
 
     /**
@@ -71,7 +93,14 @@ public final class RegisterGrpc {
      */
     public static RegisterFutureStub newFutureStub(
             io.grpc.Channel channel) {
-        return new RegisterFutureStub(channel);
+        io.grpc.stub.AbstractStub.StubFactory<RegisterFutureStub> factory =
+                new io.grpc.stub.AbstractStub.StubFactory<RegisterFutureStub>() {
+                    @Override
+                    public RegisterFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+                        return new RegisterFutureStub(channel, callOptions);
+                    }
+                };
+        return RegisterFutureStub.newStub(factory, channel);
     }
 
     public static io.grpc.ServiceDescriptor getServiceDescriptor() {
@@ -100,8 +129,8 @@ public final class RegisterGrpc {
         /**
          *
          */
-        public void register(io.grpc.registerandlogin.RegisterRequest request,
-                             io.grpc.stub.StreamObserver<io.grpc.registerandlogin.RegisterReply> responseObserver) {
+        public void register(RegisterRequest request,
+                             io.grpc.stub.StreamObserver<RegisterReply> responseObserver) {
             asyncUnimplementedUnaryCall(getRegisterMethod(), responseObserver);
         }
 
@@ -112,8 +141,8 @@ public final class RegisterGrpc {
                             getRegisterMethod(),
                             asyncUnaryCall(
                                     new MethodHandlers<
-                                            io.grpc.registerandlogin.RegisterRequest,
-                                            io.grpc.registerandlogin.RegisterReply>(
+                                            RegisterRequest,
+                                            RegisterReply>(
                                             this, METHODID_REGISTER)))
                     .build();
         }
@@ -124,27 +153,23 @@ public final class RegisterGrpc {
      * Service定义
      * </pre>
      */
-    public static final class RegisterStub extends io.grpc.stub.AbstractStub<RegisterStub> {
-        private RegisterStub(io.grpc.Channel channel) {
-            super(channel);
-        }
-
-        private RegisterStub(io.grpc.Channel channel,
-                             io.grpc.CallOptions callOptions) {
+    public static final class RegisterStub extends io.grpc.stub.AbstractAsyncStub<RegisterStub> {
+        private RegisterStub(
+                io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
             super(channel, callOptions);
         }
 
         @Override
-        protected RegisterStub build(io.grpc.Channel channel,
-                                     io.grpc.CallOptions callOptions) {
+        protected RegisterStub build(
+                io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
             return new RegisterStub(channel, callOptions);
         }
 
         /**
          *
          */
-        public void register(io.grpc.registerandlogin.RegisterRequest request,
-                             io.grpc.stub.StreamObserver<io.grpc.registerandlogin.RegisterReply> responseObserver) {
+        public void register(RegisterRequest request,
+                             io.grpc.stub.StreamObserver<RegisterReply> responseObserver) {
             asyncUnaryCall(
                     getChannel().newCall(getRegisterMethod(), getCallOptions()), request, responseObserver);
         }
@@ -155,26 +180,22 @@ public final class RegisterGrpc {
      * Service定义
      * </pre>
      */
-    public static final class RegisterBlockingStub extends io.grpc.stub.AbstractStub<RegisterBlockingStub> {
-        private RegisterBlockingStub(io.grpc.Channel channel) {
-            super(channel);
-        }
-
-        private RegisterBlockingStub(io.grpc.Channel channel,
-                                     io.grpc.CallOptions callOptions) {
+    public static final class RegisterBlockingStub extends io.grpc.stub.AbstractBlockingStub<RegisterBlockingStub> {
+        private RegisterBlockingStub(
+                io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
             super(channel, callOptions);
         }
 
         @Override
-        protected RegisterBlockingStub build(io.grpc.Channel channel,
-                                             io.grpc.CallOptions callOptions) {
+        protected RegisterBlockingStub build(
+                io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
             return new RegisterBlockingStub(channel, callOptions);
         }
 
         /**
          *
          */
-        public io.grpc.registerandlogin.RegisterReply register(io.grpc.registerandlogin.RegisterRequest request) {
+        public RegisterReply register(RegisterRequest request) {
             return blockingUnaryCall(
                     getChannel(), getRegisterMethod(), getCallOptions(), request);
         }
@@ -185,27 +206,23 @@ public final class RegisterGrpc {
      * Service定义
      * </pre>
      */
-    public static final class RegisterFutureStub extends io.grpc.stub.AbstractStub<RegisterFutureStub> {
-        private RegisterFutureStub(io.grpc.Channel channel) {
-            super(channel);
-        }
-
-        private RegisterFutureStub(io.grpc.Channel channel,
-                                   io.grpc.CallOptions callOptions) {
+    public static final class RegisterFutureStub extends io.grpc.stub.AbstractFutureStub<RegisterFutureStub> {
+        private RegisterFutureStub(
+                io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
             super(channel, callOptions);
         }
 
         @Override
-        protected RegisterFutureStub build(io.grpc.Channel channel,
-                                           io.grpc.CallOptions callOptions) {
+        protected RegisterFutureStub build(
+                io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
             return new RegisterFutureStub(channel, callOptions);
         }
 
         /**
          *
          */
-        public com.google.common.util.concurrent.ListenableFuture<io.grpc.registerandlogin.RegisterReply> register(
-                io.grpc.registerandlogin.RegisterRequest request) {
+        public com.google.common.util.concurrent.ListenableFuture<RegisterReply> register(
+                RegisterRequest request) {
             return futureUnaryCall(
                     getChannel().newCall(getRegisterMethod(), getCallOptions()), request);
         }
@@ -229,8 +246,8 @@ public final class RegisterGrpc {
         public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
             switch (methodId) {
                 case METHODID_REGISTER:
-                    serviceImpl.register((io.grpc.registerandlogin.RegisterRequest) request,
-                            (io.grpc.stub.StreamObserver<io.grpc.registerandlogin.RegisterReply>) responseObserver);
+                    serviceImpl.register((RegisterRequest) request,
+                            (io.grpc.stub.StreamObserver<RegisterReply>) responseObserver);
                     break;
                 default:
                     throw new AssertionError();
@@ -255,7 +272,7 @@ public final class RegisterGrpc {
 
         @Override
         public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-            return io.grpc.registerandlogin.RegisterProto.getDescriptor();
+            return RegisterProto.getDescriptor();
         }
 
         @Override

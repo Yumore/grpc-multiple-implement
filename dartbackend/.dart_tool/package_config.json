@@ -1,0 +1,416 @@
+{
+  "configVersion": 2,
+  "packages": [
+    {
+      "name": "_fe_analyzer_shared",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/_fe_analyzer_shared-12.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
+      "name": "analyzer",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/analyzer-0.40.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
+      "name": "archive",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/archive-2.0.13",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "args",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/args-1.6.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
+    },
+    {
+      "name": "async",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/async-2.4.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
+      "name": "bazel_worker",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/bazel_worker-0.1.25",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
+    },
+    {
+      "name": "build",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/build-1.6.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.9"
+    },
+    {
+      "name": "build_config",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/build_config-0.4.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.9"
+    },
+    {
+      "name": "build_daemon",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/build_daemon-2.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
+      "name": "build_modules",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/build_modules-3.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.10"
+    },
+    {
+      "name": "build_resolvers",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/build_resolvers-1.5.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.9"
+    },
+    {
+      "name": "build_runner",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/build_runner-1.10.11",
+      "packageUri": "lib/",
+      "languageVersion": "2.10"
+    },
+    {
+      "name": "build_runner_core",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/build_runner_core-6.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.9"
+    },
+    {
+      "name": "build_web_compilers",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/build_web_compilers-2.12.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.10"
+    },
+    {
+      "name": "built_collection",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/built_collection-4.3.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
+      "name": "built_value",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/built_value-7.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
+    },
+    {
+      "name": "charcode",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/charcode-1.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "checked_yaml",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/checked_yaml-1.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
+      "name": "cli_util",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/cli_util-0.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "code_builder",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/code_builder-3.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
+      "name": "collection",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/collection-1.14.13",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
+    },
+    {
+      "name": "convert",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/convert-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "1.17"
+    },
+    {
+      "name": "crypto",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/crypto-2.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
+    },
+    {
+      "name": "dart_style",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/dart_style-1.3.10",
+      "packageUri": "lib/",
+      "languageVersion": "2.9"
+    },
+    {
+      "name": "file",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/file-5.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
+      "name": "fixnum",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/fixnum-0.10.11",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
+      "name": "glob",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/glob-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
+      "name": "googleapis_auth",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/googleapis_auth-0.2.12",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "graphs",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/graphs-0.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "grpc",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/grpc-2.8.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.8"
+    },
+    {
+      "name": "http",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/http-0.12.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.4"
+    },
+    {
+      "name": "http2",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/http2-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.5"
+    },
+    {
+      "name": "http_multi_server",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/http_multi_server-2.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
+      "name": "http_parser",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/http_parser-3.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
+    },
+    {
+      "name": "intl",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/intl-0.16.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.5"
+    },
+    {
+      "name": "io",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/io-0.3.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "js",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/js-0.6.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "json_annotation",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/json_annotation-3.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
+      "name": "logging",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/logging-0.11.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "matcher",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/matcher-0.12.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
+      "name": "meta",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/meta-1.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "1.12"
+    },
+    {
+      "name": "mime",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/mime-0.9.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "node_interop",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/node_interop-1.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.9"
+    },
+    {
+      "name": "node_io",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/node_io-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
+      "name": "package_config",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/package_config-1.9.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
+      "name": "path",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/path-1.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "pedantic",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/pedantic-1.9.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
+      "name": "pool",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/pool-1.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "protobuf",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/protobuf-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
+      "name": "pub_semver",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/pub_semver-1.4.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "pubspec_parse",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/pubspec_parse-0.1.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
+      "name": "quiver",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/quiver-2.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "scratch_space",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/scratch_space-0.0.4+2",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
+    },
+    {
+      "name": "shelf",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/shelf-0.7.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
+      "name": "shelf_web_socket",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/shelf_web_socket-0.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "source_maps",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/source_maps-0.10.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "source_span",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/source_span-1.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
+      "name": "stack_trace",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/stack_trace-1.9.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "stream_channel",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/stream_channel-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "stream_transform",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/stream_transform-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
+      "name": "string_scanner",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/string_scanner-1.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "term_glyph",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/term_glyph-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "1.8"
+    },
+    {
+      "name": "timing",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/timing-0.1.1+3",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
+      "name": "typed_data",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/typed_data-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.4"
+    },
+    {
+      "name": "watcher",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/watcher-0.9.7+15",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
+      "name": "web_socket_channel",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/web_socket_channel-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "yaml",
+      "rootUri": "file:///Users/nathaniel/.pub-cache/hosted/pub.flutter-io.cn/yaml-2.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.4"
+    },
+    {
+      "name": "dartbackend",
+      "rootUri": "../",
+      "packageUri": "lib/",
+      "languageVersion": "2.8"
+    }
+  ],
+  "generated": "2020-12-23T09:40:30.124473Z",
+  "generator": "pub",
+  "generatorVersion": "2.10.4"
+}

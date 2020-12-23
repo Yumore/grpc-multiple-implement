@@ -8,17 +8,17 @@ option objc_class_prefix = "RAL";
 package RegisterAndLogin;
 
 // Service定义
-service CheckAuth {
-  rpc CheckAuth (CheckAuthRequest) returns (CheckAuthReply) {}
+service Authority {
+  rpc Authority (AuthorityRequest) returns (AuthorityReply) {}
 }
 
 //request包含用户名和auth
-message CheckAuthRequest {
+message AuthorityRequest {
   string userName = 1;
   string auth = 2;
 }
 
 //Response包含auth是否仍有效，true表示有效
-message CheckAuthReply {
+message AuthorityReply {
   bool isValid = 3;
 }

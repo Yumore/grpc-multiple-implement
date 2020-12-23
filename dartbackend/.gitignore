@@ -1,0 +1,11 @@
+
+# Bazel
+bazel-bin
+bazel-examples
+bazel-genfiles
+bazel-grpc-java
+bazel-out
+bazel-testlogs
+
+.dart_tool
+lib/src/generated
