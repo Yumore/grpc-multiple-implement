@@ -9,6 +9,7 @@ import java.security.spec.KeySpec;
 
 /**
  * 修改自PBKDF2算法，原理大致相当于在HASH算法基础上增加随机盐，并进行多次HASH迭代运算，随机盐使得彩虹表的建表难度大幅增加。
+ * @author nathaniel
  */
 public class EncryptionUtil {
 

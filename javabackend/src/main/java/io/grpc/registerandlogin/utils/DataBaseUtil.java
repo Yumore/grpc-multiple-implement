@@ -5,7 +5,7 @@ import java.sql.*;
 /**
  * 数据库相关操作工具类
  *
- * @author liuchang
+ * @author nathaniel
  * mysql> show tables;
  * +----------------+
  * | Tables_in_grpc |
