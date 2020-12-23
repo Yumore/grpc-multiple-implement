@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["http|lib/http.dart","googleapis_auth|lib/auth.dart","googleapis_auth|lib/src/crypto/rsa.dart","googleapis_auth|lib/src/crypto/rsa_sign.dart","googleapis_auth|lib/src/http_client_base.dart","googleapis_auth|lib/src/utils.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async","convert"],"hasMain":false}

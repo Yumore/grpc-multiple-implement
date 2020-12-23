@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.registerandlogin";
+option java_outer_classname = "RegisterProto";
+option objc_class_prefix = "RAL";
+
+package RegisterAndLogin;
+
+// Service定义
+service Register {
+  rpc Register (RegisterRequest) returns (RegisterReply) {
+  }
+}
+
+//request包含用户名、密码和设备id
+message RegisterRequest {
+  string userName = 1;
+  string userPwd = 2;
+  string deviceId = 3;
+}
+
+//Response包含resultCode、resultMsg和auth
+message RegisterReply {
+  int32 resultCode = 4;
+  string resultMsg = 5;
+  string auth = 6;
+}

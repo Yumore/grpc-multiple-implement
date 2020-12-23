@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["http2|lib/transport.dart","grpc|lib/src/shared/message.dart","grpc|lib/src/shared/status.dart","grpc|lib/src/shared/streams.dart","grpc|lib/src/shared/timeout.dart","grpc|lib/src/server/call.dart","grpc|lib/src/server/interceptor.dart","grpc|lib/src/server/service.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async","convert"],"hasMain":false}

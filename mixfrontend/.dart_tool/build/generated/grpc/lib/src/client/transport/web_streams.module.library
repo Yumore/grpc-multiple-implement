@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["grpc|lib/src/shared/message.dart","grpc|lib/src/shared/status.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["convert","math","typed_data"],"hasMain":false}

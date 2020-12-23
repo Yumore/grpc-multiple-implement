@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["googleapis_auth|lib/src/crypto/asn1.dart","googleapis_auth|lib/src/crypto/rsa.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["convert","typed_data"],"hasMain":false}

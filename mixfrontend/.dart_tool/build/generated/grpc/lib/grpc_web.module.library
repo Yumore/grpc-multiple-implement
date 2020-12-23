@@ -1,0 +1,1 @@
+{"isEntrypoint":true,"deps":["grpc|lib/src/auth/auth.dart","grpc|lib/src/client/call.dart","grpc|lib/src/client/common.dart","grpc|lib/src/client/web_channel.dart","grpc|lib/src/shared/profiler.dart","grpc|lib/src/shared/status.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}

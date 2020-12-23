@@ -1,0 +1,1 @@
+{"version":"1.0.0","name":"packages/grpc/service_api","closureName":"load__packages__grpc__service_api","sourceMapUri":"packages/grpc/service_api.unsound.ddc.js.map","moduleUri":"packages/grpc/service_api.unsound.ddc.js","libraries":[{"name":"service_api","importUri":"package:grpc/service_api.dart","fileUri":"/packages/grpc/service_api.dart","partUris":[]}]}

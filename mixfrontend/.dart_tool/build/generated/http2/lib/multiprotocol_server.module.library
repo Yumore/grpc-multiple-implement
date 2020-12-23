@@ -1,0 +1,1 @@
+{"isEntrypoint":true,"deps":["http2|lib/src/artificial_server_socket.dart","http2|lib/transport.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async","io"],"hasMain":false}

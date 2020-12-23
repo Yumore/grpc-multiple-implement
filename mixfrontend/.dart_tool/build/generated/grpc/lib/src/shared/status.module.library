@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["grpc|lib/src/generated/google/protobuf/any.pb.dart","grpc|lib/src/generated/google/rpc/code.pbenum.dart","grpc|lib/src/generated/google/rpc/error_details.pb.dart","protobuf|lib/protobuf.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}

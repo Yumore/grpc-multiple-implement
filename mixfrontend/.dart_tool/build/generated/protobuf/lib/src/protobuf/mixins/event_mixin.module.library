@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["protobuf|lib/protobuf.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async","collection"],"hasMain":false}

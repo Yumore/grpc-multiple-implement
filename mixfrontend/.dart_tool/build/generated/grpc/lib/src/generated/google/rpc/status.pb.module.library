@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["protobuf|lib/protobuf.dart","grpc|lib/src/generated/google/protobuf/any.pb.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["core"],"hasMain":false}

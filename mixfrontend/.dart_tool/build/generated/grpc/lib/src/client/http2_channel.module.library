@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["grpc|lib/src/client/channel.dart","grpc|lib/src/client/client_transport_connector.dart","grpc|lib/src/client/connection.dart","grpc|lib/src/client/http2_connection.dart","grpc|lib/src/client/options.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}

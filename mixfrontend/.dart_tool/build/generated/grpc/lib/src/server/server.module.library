@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["http2|lib/transport.dart","meta|lib/meta.dart","grpc|lib/src/shared/security.dart","grpc|lib/src/server/handler.dart","grpc|lib/src/server/interceptor.dart","grpc|lib/src/server/service.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async","io"],"hasMain":false}

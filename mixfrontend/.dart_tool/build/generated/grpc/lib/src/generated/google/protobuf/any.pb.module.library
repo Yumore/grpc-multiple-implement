@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["protobuf|lib/protobuf.dart","protobuf|lib/src/protobuf/mixins/well_known.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["core"],"hasMain":false}

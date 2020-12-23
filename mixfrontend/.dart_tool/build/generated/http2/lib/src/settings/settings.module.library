@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["http2|lib/src/error_handler.dart","http2|lib/src/frames/frames.dart","http2|lib/src/hpack/hpack.dart","http2|lib/src/sync_errors.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async"],"hasMain":false}
