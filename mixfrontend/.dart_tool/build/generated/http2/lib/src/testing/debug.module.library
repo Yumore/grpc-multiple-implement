@@ -1,1 +1,0 @@
-{"isEntrypoint":false,"deps":["http2|lib/transport.dart","http2|lib/src/connection_preface.dart","http2|lib/src/frames/frames.dart","http2|lib/src/settings/settings.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async","convert","io"],"hasMain":false}

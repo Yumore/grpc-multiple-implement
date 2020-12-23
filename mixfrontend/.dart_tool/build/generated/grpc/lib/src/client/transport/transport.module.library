@@ -1,1 +1,0 @@
-{"isEntrypoint":false,"deps":["grpc|lib/src/shared/message.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async"],"hasMain":false}

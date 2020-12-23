@@ -1,1 +1,0 @@
-{"p":["grpc_web","lib/app.dart"],"s":[["grpc_web","lib/app.dart"],["grpc_web","lib/src/generated/echo.pb.dart"],["grpc_web","lib/src/generated/echo.pbgrpc.dart"]],"d":[["grpc","lib/service_api.dart"],["protobuf","lib/protobuf.dart"]],"m":false,"is":true,"pf":"ddc"}

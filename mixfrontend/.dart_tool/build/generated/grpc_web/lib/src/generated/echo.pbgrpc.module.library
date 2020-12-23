@@ -1,1 +1,0 @@
-{"isEntrypoint":false,"deps":["grpc|lib/service_api.dart","grpc_web|lib/src/generated/echo.pb.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async","core"],"hasMain":false}

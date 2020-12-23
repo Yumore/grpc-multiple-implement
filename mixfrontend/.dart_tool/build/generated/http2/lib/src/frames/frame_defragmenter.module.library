@@ -1,1 +1,0 @@
-{"isEntrypoint":false,"deps":["http2|lib/src/sync_errors.dart","http2|lib/src/frames/frames.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}

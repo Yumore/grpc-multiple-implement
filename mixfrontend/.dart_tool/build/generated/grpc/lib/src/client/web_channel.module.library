@@ -1,1 +1,0 @@
-{"isEntrypoint":false,"deps":["grpc|lib/src/client/channel.dart","grpc|lib/src/client/connection.dart","grpc|lib/src/client/transport/xhr_transport.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}

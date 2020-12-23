@@ -1,1 +1,0 @@
-{"isEntrypoint":false,"deps":["http|lib/http.dart","googleapis_auth|lib/src/auth_http_utils.dart","googleapis_auth|lib/auth_io.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["io","convert","async"],"hasMain":false}

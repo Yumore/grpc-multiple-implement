@@ -1,1 +1,0 @@
-{"isEntrypoint":true,"deps":["http2|lib/src/connection.dart","http2|lib/src/hpack/hpack.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async","io"],"hasMain":false}

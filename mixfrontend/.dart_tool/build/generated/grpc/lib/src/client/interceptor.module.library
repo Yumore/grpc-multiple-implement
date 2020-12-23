@@ -1,1 +1,0 @@
-{"isEntrypoint":false,"deps":["grpc|lib/src/client/call.dart","grpc|lib/src/client/common.dart","grpc|lib/src/client/method.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}
