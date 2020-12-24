@@ -18,8 +18,11 @@ package io.grpc.registerandlogin.server;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import io.grpc.registerandlogin.EchoRequest;
+import io.grpc.registerandlogin.EchoResponse;
 import io.grpc.registerandlogin.HelloReply;
 import io.grpc.registerandlogin.HelloRequest;
+import io.grpc.registerandlogin.grpc.EchoServiceGrpc;
 import io.grpc.registerandlogin.grpc.HelloWorldGrpc;
 import io.grpc.stub.StreamObserver;
 
@@ -29,6 +32,8 @@ import java.util.logging.Logger;
 
 /**
  * Server that manages startup/shutdown of a {@code Greeter} server.
+ *
+ * @author nathaniel
  */
 public class HelloWorldServer {
     private static final Logger logger = Logger.getLogger(HelloWorldServer.class.getName());
@@ -49,22 +54,20 @@ public class HelloWorldServer {
         int port = 50051;
         server = ServerBuilder.forPort(port)
                 .addService(new HelloWorldImpl())
+                .addService(new EchoImpl())
                 .build()
                 .start();
         logger.info("Server started, listening on " + port);
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                // Use stderr here since the logger may have been reset by its JVM shutdown hook.
-                System.err.println("*** shutting down gRPC server since JVM is shutting down");
-                try {
-                    HelloWorldServer.this.stop();
-                } catch (InterruptedException e) {
-                    e.printStackTrace(System.err);
-                }
-                System.err.println("*** server shut down");
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            // Use stderr here since the logger may have been reset by its JVM shutdown hook.
+            System.err.println("*** shutting down gRPC server since JVM is shutting down");
+            try {
+                HelloWorldServer.this.stop();
+            } catch (InterruptedException e) {
+                e.printStackTrace(System.err);
             }
-        });
+            System.err.println("*** server shut down");
+        }));
     }
 
     private void stop() throws InterruptedException {
@@ -97,6 +100,16 @@ public class HelloWorldServer {
             System.out.println("req.name is " + request.getName());
             HelloReply reply = HelloReply.newBuilder().setMessage("Hello " + request.getName()).build();
             responseObserver.onNext(reply);
+            responseObserver.onCompleted();
+        }
+    }
+
+    static class EchoImpl extends EchoServiceGrpc.EchoServiceImplBase {
+        @Override
+        public void echo(EchoRequest request, StreamObserver<EchoResponse> responseObserver) {
+            System.out.println("req.name is " + request.getMessage());
+            EchoResponse response = EchoResponse.newBuilder().setMessage(request.getMessage()).build();
+            responseObserver.onNext(response);
             responseObserver.onCompleted();
         }
     }

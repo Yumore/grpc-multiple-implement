@@ -1,13 +1,12 @@
-name: grpc_web
+name: dartfrontend
 description: Dart gRPC-Web sample client
 homepage: https://github.com/dart-lang/grpc-dart
 
 environment:
-  sdk: '>=2.0.0 <3.0.0'
+  sdk: ">=2.0.0 <3.0.0"
 
 dependencies:
-  grpc:
-    path: ../../
+  grpc: ^2.8.0
   protobuf: ^1.0.1
 
 dev_dependencies:

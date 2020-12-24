@@ -1,3 +1,7 @@
+/*
+ * @Author: Nathaniel
+ * @Date: 2020-12-21 10:26:50
+ */
 // Copyright (c) 2018, the gRPC project authors. Please see the AUTHORS file
 // for details. All rights reserved.
 //
@@ -14,12 +18,13 @@
 // limitations under the License.
 import 'dart:html';
 
+import 'package:dartfrontend/app.dart';
+import 'package:dartfrontend/src/generated/echo.pbgrpc.dart';
 import 'package:grpc/grpc_web.dart';
-import 'package:grpc_web/app.dart';
-import 'package:grpc_web/src/generated/echo.pbgrpc.dart';
 
 void main() {
-  final channel = GrpcWebClientChannel.xhr(Uri.parse('http://localhost:8080'));
+  final channel =
+      GrpcWebClientChannel.xhr(Uri.parse('http://10.10.42.24:50051'));
   final service = EchoServiceClient(channel);
   final app = EchoApp(service);
 
@@ -27,10 +32,9 @@ void main() {
   button.onClick.listen((e) async {
     final msg = querySelector('#msg') as TextInputElement;
     final value = msg.value.trim();
+    print(value);
     msg.value = '';
-
     if (value.isEmpty) return false;
-
     if (value.indexOf(' ') > 0) {
       final countStr = value.substring(0, value.indexOf(' '));
       final count = int.tryParse(countStr);

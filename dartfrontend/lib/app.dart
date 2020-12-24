@@ -1,7 +1,11 @@
+/*
+ * @Author: Nathaniel
+ * @Date: 2020-12-21 10:26:50
+ */
 import 'dart:async';
 import 'dart:html';
 
-import 'package:grpc_web/src/generated/echo.pbgrpc.dart';
+import 'src/generated/echo.pbgrpc.dart';
 
 class EchoApp {
   final EchoServiceClient _service;

@@ -23,15 +23,15 @@ package ManualFlowControl;
 // The greeting service definition.
 service StreamingGreeter {
   // Streams a many greetings
-  rpc SayHelloStreaming (stream SteamRequest) returns (stream SteamRequest) {}
+  rpc SayHelloStreaming (stream StreamRequest) returns (stream StreamReply) {}
 }
 
 // The request message containing the user's name.
-message SteamRequest {
+message StreamRequest {
   string name = 1;
 }
 
 // The response message containing the greetings
-message SteamReply {
+message StreamReply {
   string message = 1;
 }
