@@ -12,7 +12,7 @@ import java.security.spec.KeySpec;
  *
  * @author nathaniel
  */
-public class EncryptionUtil {
+public class EncryptionUtils {
 
     private static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
 

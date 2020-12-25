@@ -10,227 +10,189 @@ import java.sql.*;
  * +----------------+
  * | Tables_in_grpc |
  * +----------------+
- * | user_table     |
+ * | user_table  |
  * +----------------+
  */
-public class DataBaseUtil {
+public class DatabaseUtils {
     public static final String COLUMN_USER_NAME = "username";
     public static final String COLUMN_PASSWORD = "password";
-    public static final String COLUMN_DEVICE_ID = "deviceid";
-    public static final String COLUMN_AUTH = "auth";
+    public static final String COLUMN_DEVICE_ID = "deviceId";
+    public static final String COLUMN_TOKEN = "token";
     private static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
-    //    private static final String URL = "jdbc:mysql://localhost:3306/gRPC?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC?autoReconnect=true&useSSL=false";
-    private static final String URL = "jdbc:mysql://localhost:3306/gRPC?autoReconnect=true&useSSL=false";
-    private static final String USER_NAME = "root";
+    private static final String MYSQL_URL_0 = "jdbc:mysql://localhost:3306/gRPC?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC?autoReconnect=true&useSSL=false";
+    private static final String MYSQL_URL = "jdbc:mysql://localhost:3306/gRPC?autoReconnect=true&useSSL=false";
+    private static final String USERNAME = "root";
     private static final String PASSWORD = "Nathan@126.com";
+    private static final String TABLE_NAME = "user_table";
+    @SuppressWarnings("SqlNoDataSourceInspection")
+    private static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS `user_table`(" +
+            "`user_id` INT UNSIGNED AUTO_INCREMENT," +
+            "`username` VARCHAR(40) NOT NULL," +
+            "`password` VARCHAR(40) NOT NULL," +
+            "`deviceId` VARCHAR(40) NOT NULL," +
+            "`token` VARCHAR(40) NOT NULL," +
+            "PRIMARY KEY ( `user_id` )" +
+            ")ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+    private static DatabaseUtils databaseUtils;
+    private Connection connection;
+    private boolean initialized;
+    private PreparedStatement preparedStatement;
 
-    /**
-     * 建表
-     */
-    DataBaseUtil() {
-        Connection connection = null;
+    @SuppressWarnings("SqlNoDataSourceInspection")
+    private DatabaseUtils() {
         try {
-            Class.forName(DRIVER_NAME);
-            connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
-            String createTableSql = "CREATE TABLE IF NOT EXISTS `user_table`(" +
-                    "   `user_id` INT UNSIGNED AUTO_INCREMENT," +
-                    "   `username` VARCHAR(40) NOT NULL," +
-                    "   `password` VARCHAR(40) NOT NULL," +
-                    "   `deviceid` VARCHAR(40) NOT NULL," +
-                    "   `auth` VARCHAR(40) NOT NULL," +
-                    "   PRIMARY KEY ( `user_id` )" +
-                    ")ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-            PreparedStatement preparedStatement = connection.prepareStatement(createTableSql);
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
+            Class.forName(DRIVER_NAME).getConstructor();
+            connection = DriverManager.getConnection(MYSQL_URL, USERNAME, PASSWORD);
+            connection.setAutoCommit(false);
+            if (!initialized) {
+                createTable();
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
+    }
+
+    public synchronized static DatabaseUtils getInstance() {
+        if (databaseUtils == null) {
+            databaseUtils = new DatabaseUtils();
+        }
+        return databaseUtils;
     }
 
     /**
      * 向数据库的user_table表中添加一条用户数据
      *
-     * @param userName 用户名
+     * @param username 用户名
      * @param password 密码
      * @param deviceId 设备id
-     * @param auth     auth
+     * @param token    token
      */
-    @SuppressWarnings("SqlDialectInspection")
-    public static void addEntry(String userName, String password, String deviceId, String auth) {
+    @SuppressWarnings({"SqlDialectInspection", "SqlResolve", "SqlInsertValues"})
+    public void addEntry(String username, String password, String deviceId, String token) {
         System.out.println("addEntity");
-        Connection connection = null;
         try {
-            Class.forName(DRIVER_NAME);
-            connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
-            if (connection == null) {
-                System.out.println("connection is null");
-            } else {
-                String sql = "select table_name from information_schema.tables where table_schema='opms'";
-                Statement statement = connection.createStatement();
-                ResultSet result = statement.executeQuery(sql);
-                while (result.next()) {
-                    System.out.println(result.getString("TABLE_NAME"));
-                }
-            }
-            password = EncryptionUtil.generateEncryptedPassword(password, EncryptionUtil.generateSalt(password));
-            userName = "\"" + userName + "\"";
-            password = "\"" + password + "\"";
-            deviceId = "\"" + deviceId + "\"";
-            auth = "\"" + auth + "\"";
-
-            String insertSql = "INSERT INTO user_table " +
-                    " (username, password, deviceid, auth)" +
-                    " VALUES " + "(" + userName + ", " + password + ", " + deviceId + ", " + auth + ")";
-            PreparedStatement preparedStatement = connection.prepareStatement(insertSql);
+            password = EncryptionUtils.generateEncryptedPassword(password, EncryptionUtils.generateSalt(password));
+            String insertSql = "INSERT INTO  " + TABLE_NAME + "(`username`, `password`, `deviceId`, `token`) VALUES ( ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(insertSql);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3, deviceId);
+            preparedStatement.setString(4, token);
             preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
+            connection.commit();
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+            try {
+                preparedStatement.close();
+                connection.rollback();
+                connection.close();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
             }
+            e.printStackTrace();
         }
     }
 
     /**
      * 根据用户名查询目标数据
      *
-     * @param userName 用户名
+     * @param username 用户名
      * @param target   目标column的数据
      * @return 查询到的值，未查寻到返回空字符串
      */
-    public static String query(String userName, String target) {
-        System.out.println("queryEntity");
-        Connection connection = null;
+    @SuppressWarnings({"SqlResolve", "SqlNoDataSourceInspection"})
+    public String queryEntity(String username, String target) {
         String result = "";
         try {
-            Class.forName(DRIVER_NAME);
-            connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
-            if (connection == null) {
-                System.out.println("connection is null");
-            } else {
-                String sql = "select table_name from information_schema.tables where table_schema='opms'";
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(sql);
-                while (resultSet.next()) {
-                    System.out.println(resultSet.getString("TABLE_NAME"));
-                }
+            String querySql = "SELECT " + target + " from " + TABLE_NAME + " WHERE username = ?";
+            preparedStatement = connection.prepareStatement(querySql);
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                result = resultSet.getString(target);
             }
-            userName = "\"" + userName + "\"";
-
-            String querySql = "SELECT " + target + " from user_table WHERE username=" + userName + ";";
-            PreparedStatement preparedStatement = connection.prepareStatement(querySql);
-            ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
-                result = rs.getString(target);
-            }
-            rs.close();
-            preparedStatement.close();
-            connection.close();
+            resultSet.close();
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+            try {
+                preparedStatement.close();
+                connection.rollback();
+                connection.close();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
             }
+            e.printStackTrace();
         }
         return result;
     }
 
     /**
-     * 更新制定用户名的auth
+     * 更新制定用户名的token
      *
-     * @param userName 用户名
-     * @param newAuth  新auth
-     * @return 是否更新成功
+     * @param username 用户名
+     * @param token    新token
      */
-    public static boolean updateAuth(String userName, String newAuth) {
-        Connection connection = null;
+    @SuppressWarnings({"SqlResolve", "SqlNoDataSourceInspection"})
+    public void updateToken(String username, String token, String deviceId) {
         try {
-            Class.forName(DRIVER_NAME);
-            connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
-
-            userName = "\"" + userName + "\"";
-            newAuth = "\"" + newAuth + "\"";
-
-            String sql = "UPDATE user_table" +
-                    " SET auth= " + newAuth +
-                    " WHERE username= " + userName + ";";
+            String sql = "UPDATE " + TABLE_NAME + " SET token = ?, deviceid = ? WHERE username = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, token);
+            preparedStatement.setString(2, deviceId);
+            preparedStatement.setString(3, username);
             preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
-            return true;
+            connection.commit();
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+            try {
+                preparedStatement.close();
+                connection.rollback();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
             }
+            e.printStackTrace();
         }
-        return false;
     }
 
     /**
-     * 更新制定用户名的auth
+     * 更新制定用户名的token
      *
-     * @param userName    用户名
-     * @param newDeviceId 新auth
-     * @return 是否更新成功
+     * @param username 用户名
+     * @param deviceId 新token
      */
-    public static boolean updateDeviceId(String userName, String newDeviceId) {
-        Connection connection = null;
+    @SuppressWarnings({"SqlNoDataSourceInspection", "SqlResolve"})
+    public void updateDeviceId(String username, String deviceId) {
         try {
-            Class.forName(DRIVER_NAME);
-            connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
-
-            userName = "\"" + userName + "\"";
-            newDeviceId = "\"" + newDeviceId + "\"";
-
-            String sql = "UPDATE user_table" +
-                    " SET deviceid= " + newDeviceId +
-                    " WHERE username= " + userName + ";";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            final String sql = "UPDATE " + TABLE_NAME + " SET deviceId = ? WHERE username = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, deviceId);
+            preparedStatement.setString(2, username);
             preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
-            return true;
+            connection.commit();
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+            try {
+                preparedStatement.close();
+                connection.rollback();
+                connection.close();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
             }
+            e.printStackTrace();
         }
-        return false;
+    }
+
+    public void createTable() {
+        try {
+            preparedStatement = connection.prepareStatement(CREATE_TABLE);
+            preparedStatement.executeUpdate();
+            connection.commit();
+            initialized = true;
+        } catch (SQLException throwable) {
+            try {
+                preparedStatement.close();
+                connection.close();
+            } catch (SQLException sqlException) {
+                sqlException.printStackTrace();
+            }
+            throwable.printStackTrace();
+        }
     }
 }

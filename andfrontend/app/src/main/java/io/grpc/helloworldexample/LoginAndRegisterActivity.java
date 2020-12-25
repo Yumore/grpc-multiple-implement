@@ -22,34 +22,19 @@ import io.grpc.registerandlogin.LoginGrpc;
 import io.grpc.registerandlogin.LoginReply;
 import io.grpc.registerandlogin.LoginRequest;
 
+/**
+ * @author nathaniel
+ */
 public class LoginAndRegisterActivity extends AppCompatActivity {
-    /**
-     * 请求成功
-     */
-    private static final int REPLY_SUCCESS = 0;
-    /**
-     * 请求失败
-     */
-    private static final int REPLY_FAILURE = -1;
-
-    /**
-     * 登录/注册按钮
-     */
-    private Button mGeneralButton;
-    /**
-     * 页面标题
-     */
-    private TextView mTitleText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mTitleText = findViewById(R.id.title_text);
-        mGeneralButton = findViewById(R.id.login_btn);
+        TextView mTitleText = findViewById(R.id.title_text);
+        Button mGeneralButton = findViewById(R.id.login_btn);
 
         mTitleText.setText("登录");
-        mGeneralButton.setText("登录");
         final EditText userName = findViewById(R.id.user_name);
         final EditText password = findViewById(R.id.user_pwd);
         mGeneralButton.setOnClickListener(new View.OnClickListener() {
@@ -62,42 +47,15 @@ public class LoginAndRegisterActivity extends AppCompatActivity {
 
             }
         });
-
-        final View registerText = findViewById(R.id.register_text);
-        registerText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //跳转注册页(此处仅在本页面做控件重用)
-                registerText.setVisibility(View.GONE);
-                mTitleText.setText("注册");
-                mGeneralButton.setText("注册");
-                mGeneralButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                });
-
-            }
-        });
     }
 
-    /**
-     * 获取设备id
-     *
-     * @return 设备IMEI
-     */
     private String getDeviceId() {
         return UUID.randomUUID().toString();
     }
 
     /**
-     * 跳转到业务页面
+     * AsyncTask<Params, Progress, Result>
      */
-    private void redirectToHomePage() {
-        //TODO 跳转到业务页面
-    }
-
     private static class GrpcTask extends AsyncTask<String, Void, String> {
         private final WeakReference<Activity> activityReference;
         private ManagedChannel channel;

@@ -20,8 +20,8 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.registerandlogin.*;
 import io.grpc.registerandlogin.utils.Base64Encoder;
-import io.grpc.registerandlogin.utils.DataBaseUtil;
-import io.grpc.registerandlogin.utils.EncryptionUtil;
+import io.grpc.registerandlogin.utils.DatabaseUtils;
+import io.grpc.registerandlogin.utils.EncryptionUtils;
 import io.grpc.stub.StreamObserver;
 
 import java.io.IOException;
@@ -29,11 +29,18 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import static io.grpc.registerandlogin.utils.DataBaseUtil.*;
+import static io.grpc.registerandlogin.utils.DatabaseUtils.*;
 
+/**
+ * @author nathaniel
+ */
 public class RegisterAndLoginServer {
     private static final Logger logger = Logger.getLogger(RegisterAndLoginServer.class.getName());
+    private static final int RESULT_SUCCESS = 0;
+    private static final int RESULT_FAILURE = -1;
 
     private Server server;
 
@@ -72,7 +79,6 @@ public class RegisterAndLoginServer {
         /* The port on which the server should run */
         int port = 50051;
         server = ServerBuilder.forPort(port)
-                .addService(new RegisterImpl())
                 .addService(new LoginImpl())
                 .addService(new CheckAuthImpl())
                 .build()
@@ -104,43 +110,7 @@ public class RegisterAndLoginServer {
         }
     }
 
-    static class RegisterImpl extends RegisterGrpc.RegisterImplBase {
-        /**
-         * 注册
-         *
-         * @param req              请求实体
-         * @param responseObserver 响应观察者
-         */
-        @Override
-        public void register(RegisterRequest req, StreamObserver<RegisterReply> responseObserver) {
-            final int RESULT_SUCCESS = 0;
-            final int RESULT_FAILURE = -1;
-            String userName = req.getUserName();
-            String userPwd = req.getUserPwd();
-            String deviceId = req.getDeviceId();
-            String queriedUserName = DataBaseUtil.query(userName, COLUMN_USER_NAME);
-            RegisterReply reply;
-            String regex = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$";
-            if (queriedUserName != null && queriedUserName.length() != 0) {
-                //userName已存在
-                reply = RegisterReply.newBuilder().setResultCode(RESULT_FAILURE).setResultMsg("用户名已经存在，请换一个用户名").build();
-            } else if (!userPwd.matches(regex)) {
-                //密码不符合规则
-                reply = RegisterReply.newBuilder().setResultCode(RESULT_FAILURE).setResultMsg("密码不符合规则").build();
-            } else {
-                //注册成功
-                String auth = generateAuth(userName, deviceId);
-                reply = RegisterReply.newBuilder().setResultCode(RESULT_SUCCESS).setAuth(auth).setResultMsg("注册成功").build();
-                //addEntry中对密码做加密处理
-                DataBaseUtil.addEntry(userName, userPwd, deviceId, auth);
-            }
-            //回调结果
-            responseObserver.onNext(reply);
-            responseObserver.onCompleted();
-        }
-    }
-
-    static class CheckAuthImpl extends AuthorityGrpc.AuthorityImplBase {
+    public static class CheckAuthImpl extends AuthorityGrpc.AuthorityImplBase {
         /**
          * 检查auth
          *
@@ -152,7 +122,7 @@ public class RegisterAndLoginServer {
             System.out.println("checkAuthInvoked");
             String userName = req.getUserName();
             String auth = req.getAuth();
-            String queriedAuth = DataBaseUtil.query(userName, COLUMN_AUTH);
+            String queriedAuth = DatabaseUtils.getInstance().queryEntity(userName, COLUMN_TOKEN);
             AuthorityReply reply;
             //用户名对应的auth
             if (!queriedAuth.equals(auth)) {
@@ -166,7 +136,7 @@ public class RegisterAndLoginServer {
         }
     }
 
-    static class LoginImpl extends io.grpc.registerandlogin.grpc.LoginGrpc.LoginImplBase {
+    public static class LoginImpl extends io.grpc.registerandlogin.grpc.LoginGrpc.LoginImplBase {
         /**
          * 登录
          *
@@ -176,45 +146,76 @@ public class RegisterAndLoginServer {
         @Override
         public void login(LoginRequest req, StreamObserver<LoginReply> responseObserver) {
             System.out.println("req.name is " + req.getUserName());
-            final int RESULT_SUCCESS = 0;
-            final int RESULT_FAILURE = -1;
             String userName = req.getUserName();
             String userPwd = req.getUserPwd();
             String deviceId = req.getDeviceId();
-            String queriedUserName = DataBaseUtil.query(userName, COLUMN_USER_NAME);
-            String queriedPwd = DataBaseUtil.query(userName, COLUMN_PASSWORD);
+            String queriedUserName = DatabaseUtils.getInstance().queryEntity(userName, COLUMN_USER_NAME);
+            String queriedPwd = DatabaseUtils.getInstance().queryEntity(userName, COLUMN_PASSWORD);
             int resultCode = RESULT_FAILURE;
             String resultMsg = "null";
             String newAuth = "null";
             System.out.println(queriedUserName + ":" + queriedPwd);
+            String regex = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$";
             if (queriedUserName == null || queriedUserName.length() == 0) {
-                //用户名不存在
-                resultCode = RESULT_FAILURE;
-                resultMsg = "用户名不存在";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(userPwd);
+                if (matcher.matches()) {
+                    String auth = generateAuth(userName, deviceId);
+                    DatabaseUtils.getInstance().addEntry(userName, userPwd, deviceId, auth);
+                    resultCode = RESULT_SUCCESS;
+                    resultMsg = "注册成功";
+                } else {
+                    resultCode = RESULT_FAILURE;
+                    resultMsg = "密码不合格规则";
+                }
             } else {
                 try {
-                    System.out.println("--用户名存在");
-                    if (!EncryptionUtil.authenticate(userPwd, queriedPwd, EncryptionUtil.generateSalt(userPwd))) {
-                        //用户名密码不匹配
-                        System.out.println("--用户名密码不匹配");
-                        resultCode = RESULT_FAILURE;
+                    if (!EncryptionUtils.authenticate(userPwd, queriedPwd, EncryptionUtils.generateSalt(userPwd))) {
                         resultMsg = "用户名与密码不匹配";
                     } else {
-                        System.out.println("--用户名密码匹配");
-                        //用户名密码匹配
                         newAuth = generateAuth(userName, deviceId);
                         resultCode = RESULT_SUCCESS;
                         resultMsg = "登录成功";
-                        //更新数据库中的auth
-                        DataBaseUtil.updateAuth(userName, newAuth);
-                        DataBaseUtil.updateDeviceId(userName, deviceId);
+                        DatabaseUtils.getInstance().updateToken(userName, newAuth, deviceId);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
             LoginReply reply = LoginReply.newBuilder().setResultCode(resultCode).setAuth(newAuth).setResultMsg(resultMsg).build();
-            System.out.println("reply = " + reply.getResultMsg());
+            responseObserver.onNext(reply);
+            responseObserver.onCompleted();
+        }
+    }
+
+    static class RegisterImpl extends RegisterGrpc.RegisterImplBase {
+        /**
+         * 注册
+         *
+         * @param req              请求实体
+         * @param responseObserver 响应观察者
+         */
+        @Override
+        public void register(RegisterRequest req, StreamObserver<RegisterReply> responseObserver) {
+            String userName = req.getUserName();
+            String userPwd = req.getUserPwd();
+            String deviceId = req.getDeviceId();
+            String queriedUserName = DatabaseUtils.getInstance().queryEntity(userName, COLUMN_USER_NAME);
+            RegisterReply reply;
+            String regex = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$";
+            if (queriedUserName != null && queriedUserName.length() != 0) {
+                //userName已存在
+                reply = RegisterReply.newBuilder().setResultCode(RESULT_FAILURE).setResultMsg("用户名已经存在，请换一个用户名").build();
+            } else if (!userPwd.matches(regex)) {
+                //密码不符合规则
+                reply = RegisterReply.newBuilder().setResultCode(RESULT_FAILURE).setResultMsg("密码不符合规则").build();
+            } else {
+                //注册成功
+                String auth = generateAuth(userName, deviceId);
+                reply = RegisterReply.newBuilder().setResultCode(RESULT_SUCCESS).setAuth(auth).setResultMsg("注册成功").build();
+                //addEntry中对密码做加密处理
+                DatabaseUtils.getInstance().addEntry(userName, userPwd, deviceId, auth);
+            }
             //回调结果
             responseObserver.onNext(reply);
             responseObserver.onCompleted();
