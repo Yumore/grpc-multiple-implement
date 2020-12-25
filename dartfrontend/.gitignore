@@ -9,3 +9,5 @@ bazel-testlogs
 
 .dart_tool
 lib/src/generated
+build
+.idea

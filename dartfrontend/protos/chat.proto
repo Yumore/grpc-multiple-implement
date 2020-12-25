@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import public "empty.proto";
+import weak "wrappers.proto";
+
+// Message is response for ChatService.Subscribe method
+message Message{
+    // message body
+    string text = 1;
+}
+
+service ChatService {
+    // Send sends message to the server
+    rpc Send(StringValue) returns (Empty) {}
+
+    // Subscribe is streaming method to get echo messages from the server
+    rpc Subscribe(Empty) returns (stream Message) {}
+}
