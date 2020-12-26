@@ -10,8 +10,8 @@ import 'v1/empty.pb.dart';
 import 'v1/wrappers.pb.dart';
 
 /// CHANGE TO IP ADDRESS OF YOUR SERVER IF IT IS NECESSARY
-const serverIP = "172.16.1.18";
-const serverPort = 3000;
+const serverIP = "10.10.42.24";
+const serverPort = 50051;
 
 /// ChatService client implementation
 class ChatService {

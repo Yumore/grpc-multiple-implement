@@ -1,5 +1,8 @@
 syntax = "proto3";
 
+import 'google/protobuf/empty.proto';
+import 'google/protobuf/wrappers.proto';
+
 option csharp_namespace = "Google.Protobuf.WellKnownTypes";
 option go_package = "protos/chat";
 option java_package = "com.google.protobuf";
@@ -8,19 +11,16 @@ option java_multiple_files = true;
 option objc_class_prefix = "GPB";
 option cc_enable_arenas = true;
 
-import "empty.proto";
-import "wrappers.proto";
-
 // Message is response for ChatService.Subscribe method
 message Message{
-    // message body
-    string text = 1;
+  // message body
+  string text = 1;
 }
 
 service ChatService {
-    // Send sends message to the server
-    rpc Send(StringValue) returns (Empty) {}
+  // Send sends message to the server
+  rpc Send(google.protobuf.StringValue) returns (google.protobuf.Empty) {}
 
-    // Subscribe is streaming method to get echo messages from the server
-    rpc Subscribe(Empty) returns (stream Message) {}
+  // Subscribe is streaming method to get echo messages from the server
+  rpc Subscribe(google.protobuf.Empty) returns (stream Message) {}
 }

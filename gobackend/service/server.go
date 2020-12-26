@@ -1,17 +1,15 @@
-package grpc
+package service
 
 import (
 	"context"
+	chat "gobackend/protos"
+	"google.golang.org/grpc"
 	"log"
 	"net"
-
-	"google.golang.org/grpc"
-
-	"github.com/amsokol/flutter-grpc-tutorial/go-server/pkg/api/v1"
 )
 
 // RunServer registers gRPC service and run server
-func RunServer(ctx context.Context, srv v1.ChatServiceServer, port string) error {
+func RunServer(ctx context.Context, srv chat.ChatServiceServer, port string) error {
 	listen, err := net.Listen("tcp", ":"+port)
 	if err != nil {
 		return err
@@ -19,7 +17,7 @@ func RunServer(ctx context.Context, srv v1.ChatServiceServer, port string) error
 
 	// register service
 	server := grpc.NewServer()
-	v1.RegisterChatServiceServer(server, srv)
+	chat.RegisterChatServiceServer(server, srv)
 
 	// start gRPC server
 	log.Println("starting gRPC server...")
