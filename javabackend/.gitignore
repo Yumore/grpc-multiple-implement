@@ -26,7 +26,6 @@ bazel-testlogs
 .classpath
 .project
 .settings
-.gitignore
 bin
 
 # OS X

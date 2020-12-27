@@ -14,13 +14,13 @@ Chat application created with gRPC. This was a study for bidirectional gRPC stre
 
 ## 运行程序方法
 
-+ 使用界面ui: python chat_server_app.py和python chat_client_app.py
++ 使用界面ui: 
+	python chat_server_app.py
+	python chat_client_app.py
 
-![ui界面](ui_show.gif)
-
-+ 使用控制台程序：python console_chat_server.py和python console_chat_client.py
-
-![控制台显示](console_show.gif)
++ 使用控制台程序：
+	python console_chat_server.py
+	python console_chat_client.py
 
 ## 参考
 + [tcp_udp_web_tools](https://github.com/Wangler2333/tcp_udp_web_tools-pyqt5)
