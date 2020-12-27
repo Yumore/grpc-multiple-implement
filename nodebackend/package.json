@@ -1,5 +1,5 @@
 {
-  "name": "grpcnodeserver",
+  "name": "nodebackend",
   "version": "1.0.1",
   "description": "Chat example using grpc and node",
   "main": "server.js",
@@ -13,7 +13,6 @@
     "buffers",
     "rpc"
   ],
-  "author": "Tulio Castro",
   "license": "MIT",
   "dependencies": {
     "@grpc/proto-loader": "^0.3.0",
@@ -21,6 +20,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tuliocastro/grpc-node-chat"
+    "url": "https://github.com/Yumore/grpc-multiply-implement"
   }
 }
