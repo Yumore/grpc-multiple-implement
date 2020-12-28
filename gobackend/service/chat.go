@@ -1,4 +1,4 @@
-package service
+package chat
 
 import (
 	"context"
@@ -14,13 +14,10 @@ type chatServiceServer struct {
 	msg chan string
 }
 
-func (s *chatServiceServer) mustEmbedUnimplementedChatServiceServer() {
-	panic(chatServiceServer{msg: make(chan string, 1000)})
-}
-
 // NewChatServiceServer creates Chat service object
 func NewChatServiceServer() chat.ChatServiceServer {
-	return &chatServiceServer{msg: make(chan string, 1000)}
+	var _ = &chatServiceServer{msg: make(chan string, 1000)}
+	return nil
 }
 
 // Send sends message to the server

@@ -11,6 +11,8 @@ option java_multiple_files = true;
 option objc_class_prefix = "GPB";
 option cc_enable_arenas = true;
 
+package chat;
+
 // Message is response for ChatService.Subscribe method
 message Message{
   // message body

@@ -35,7 +35,7 @@ func NewChatServiceClient(cc grpc.ClientConnInterface) ChatServiceClient {
 
 func (c *chatServiceClient) Send(ctx context.Context, in *wrappers.StringValue, opts ...grpc.CallOption) (*empty.Empty, error) {
 	out := new(empty.Empty)
-	err := c.cc.Invoke(ctx, "/ChatService/Send", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/chat.ChatService/Send", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ func (c *chatServiceClient) Send(ctx context.Context, in *wrappers.StringValue, 
 }
 
 func (c *chatServiceClient) Subscribe(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (ChatService_SubscribeClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ChatService_serviceDesc.Streams[0], "/ChatService/Subscribe", opts...)
+	stream, err := c.cc.NewStream(ctx, &_ChatService_serviceDesc.Streams[0], "/chat.ChatService/Subscribe", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -118,7 +118,7 @@ func _ChatService_Send_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ChatService/Send",
+		FullMethod: "/chat.ChatService/Send",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ChatServiceServer).Send(ctx, req.(*wrappers.StringValue))
@@ -148,7 +148,7 @@ func (x *chatServiceSubscribeServer) Send(m *Message) error {
 }
 
 var _ChatService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "ChatService",
+	ServiceName: "chat.ChatService",
 	HandlerType: (*ChatServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

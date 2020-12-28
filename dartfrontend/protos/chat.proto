@@ -11,6 +11,8 @@ option cc_enable_arenas = true;
 import "empty.proto";
 import "wrappers.proto";
 
+package chat;
+
 // Message is response for ChatService.Subscribe method
 message Message{
     // message body
